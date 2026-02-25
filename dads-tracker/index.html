@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Tracker">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
+  <title>Dad's Daily Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Toast notification -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <h1 id="header-title">My Tracker</h1>
+    <p id="header-date" class="header-date"></p>
+  </header>
+
+  <!-- Main content area -->
+  <main class="content">
+
+    <!-- MEALS TAB -->
+    <section id="tab-meals" class="tab-content active">
+      <div class="tab-hero">
+        <button id="btn-ate" class="big-button green" aria-label="Log a meal">
+          <span class="big-button-icon">🍽️</span>
+          <span class="big-button-text">I Ate a Meal</span>
+        </button>
+      </div>
+      <div class="summary-box">
+        <p class="summary-number" id="meals-count">0</p>
+        <p class="summary-label">meals today</p>
+      </div>
+      <ul id="meals-list" class="entry-list" aria-label="Today's meals"></ul>
+    </section>
+
+    <!-- WALKING TAB -->
+    <section id="tab-walking" class="tab-content">
+      <div class="tab-hero">
+        <button id="btn-walk" class="big-button blue" aria-label="Start a walk">
+          <span class="big-button-icon">🚶</span>
+          <span class="big-button-text">Start Walk</span>
+        </button>
+        <p id="walk-timer" class="walk-timer hidden">0:00</p>
+        <p id="walk-steps" class="walk-steps hidden">0 steps</p>
+      </div>
+      <div class="summary-box">
+        <p class="summary-number" id="walks-total-time">0 min</p>
+        <p class="summary-label">total walking today</p>
+        <p class="summary-sub" id="walks-count">0 walks</p>
+      </div>
+      <div class="manual-entry">
+        <p class="manual-label">Or log a walk manually:</p>
+        <div class="manual-row">
+          <input type="number" id="walk-minutes" class="manual-input" placeholder="Minutes" min="1" max="300" aria-label="Walk duration in minutes">
+          <button id="btn-log-walk" class="manual-button" aria-label="Log walk">Log Walk</button>
+        </div>
+      </div>
+      <ul id="walks-list" class="entry-list" aria-label="Today's walks"></ul>
+    </section>
+
+    <!-- SLEEP TAB -->
+    <section id="tab-sleep" class="tab-content">
+      <div class="tab-hero sleep-hero">
+        <button id="btn-sleep" class="big-button purple" aria-label="Going to sleep">
+          <span class="big-button-icon">😴</span>
+          <span class="big-button-text">Going to Sleep</span>
+        </button>
+        <button id="btn-wake" class="big-button orange hidden" aria-label="I'm awake">
+          <span class="big-button-icon">☀️</span>
+          <span class="big-button-text">I'm Awake</span>
+        </button>
+      </div>
+      <div id="sleep-summary" class="summary-box">
+        <p class="summary-number" id="sleep-duration">—</p>
+        <p class="summary-label">last night's sleep</p>
+        <p class="summary-sub" id="sleep-times"></p>
+      </div>
+      <div class="manual-entry">
+        <p class="manual-label">Or enter sleep times manually:</p>
+        <div class="manual-col">
+          <label for="sleep-bedtime" class="time-label">Bedtime</label>
+          <input type="time" id="sleep-bedtime" class="time-input" aria-label="Bedtime">
+          <label for="sleep-waketime" class="time-label">Wake time</label>
+          <input type="time" id="sleep-waketime" class="time-input" aria-label="Wake time">
+          <button id="btn-log-sleep" class="manual-button wide" aria-label="Log sleep">Log Sleep</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORY TAB -->
+    <section id="tab-history" class="tab-content">
+      <div class="history-nav">
+        <button id="btn-prev-day" class="nav-button" aria-label="Previous day">◀</button>
+        <p id="history-date" class="history-date"></p>
+        <button id="btn-next-day" class="nav-button" aria-label="Next day">▶</button>
+      </div>
+      <div id="history-content" class="history-content">
+        <div class="history-section">
+          <h3>🍽️ Meals</h3>
+          <p id="history-meals" class="history-data">No data</p>
+        </div>
+        <div class="history-section">
+          <h3>🚶 Walking</h3>
+          <p id="history-walks" class="history-data">No data</p>
+        </div>
+        <div class="history-section">
+          <h3>😴 Sleep</h3>
+          <p id="history-sleep" class="history-data">No data</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom navigation -->
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-tab active" data-tab="meals" aria-label="Meals">
+      <span class="nav-icon">🍽️</span>
+      <span class="nav-label">Meals</span>
+    </button>
+    <button class="nav-tab" data-tab="walking" aria-label="Walking">
+      <span class="nav-icon">🚶</span>
+      <span class="nav-label">Walking</span>
+    </button>
+    <button class="nav-tab" data-tab="sleep" aria-label="Sleep">
+      <span class="nav-icon">😴</span>
+      <span class="nav-label">Sleep</span>
+    </button>
+    <button class="nav-tab" data-tab="history" aria-label="History">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label">History</span>
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
