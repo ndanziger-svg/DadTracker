@@ -2,7 +2,7 @@
   "name": "Dad's Daily Tracker",
   "short_name": "Tracker",
   "description": "Simple daily tracker for meals, walking, and sleep",
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
